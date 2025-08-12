@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Table</title>
+<link rel="icon" href="img\icon.jpg">
+<style>
+    /* Import anime-style font (Luckiest Guy example) */
+    @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+    body {
+        background: url('img/wallpaperflare.com_wallpaper.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+        font-family: 'Luckiest Guy', cursive;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        margin-top: 20px;
+        font-size: 50px;
+    }
+
+    table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    td, th {
+        padding: 15px;
+        border: 1px solid white;
+        font-size: 20px;
+    }
+
+    input, select, button {
+        font-family: 'Luckiest Guy', cursive;
+        padding: 8px;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+        font-size: 16px;
+    }
+
+    input[type="text"], input[type="number"], input[type="email"], select {
+        width: 200px;
+    }
+
+    button {
+        background-color: #ff4b5c;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #ff1e38;
+    }
+</style>
+</head>
+<body>
+
+<h1>Student Table</h1>
+
+<form id="form">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td><input id="name" type="text" placeholder="Enter Name"></td>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td><input id="age" type="number" placeholder="Enter Age"></td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>
+                <input type="radio" name="gender" value="male"> Male
+                <input type="radio" name="gender" value="female"> Female
+            </td>
+        </tr>
+        <tr>
+            <td>Course</td>
+            <td>
+                <select id="course">
+                    <option>Java</option>
+                    <option>JavaScript</option>
+                    <option>SQL</option>
+                    <option>HTML</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>E-mail</td>
+            <td><input id="email" type="email" placeholder="Enter E-mail"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="button" onclick="adddata()">Save</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<table id="datatable">
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Course</th>
+        <th>E-mail</th>
+        <th>Action</th>
+    </tr>
+</table>
+
+<script>
+function adddata(){
+    var name = document.getElementById("name").value;
+    var age = document.getElementById("age").value;
+    var gender = document.querySelector("input[name='gender']:checked")?.value || "";
+    var course = document.getElementById("course").value;
+    var email = document.getElementById("email").value;
+
+    if (!name || !age || !gender || !course || !email) {
+        alert("Please fill all fields!");
+        return;
+    }
+
+    var table=document.getElementById("datatable");
+    var row=table.insertRow();
+    row.insertCell(0).innerHTML=name;
+    row.insertCell(1).innerHTML=age;
+    row.insertCell(2).innerHTML=gender;
+    row.insertCell(3).innerHTML=course;
+    row.insertCell(4).innerHTML=email;
+    row.insertCell(5).innerHTML="<button onclick='deletebtn(this)'>Delete</button>";
+
+    document.getElementById("form").reset();
+}
+
+function deletebtn(btn){
+    var row=btn.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+}
+</script>
+
+</body>
+</html>
